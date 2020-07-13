@@ -54,6 +54,8 @@ export default {
         apiInfo = path;
       }
     });
+    apiInfo.host="http://"+instance.host
+    // apiInfo.url=instance.host+instance.basePath
     this.storeCacheApiAddApiInfo(apiInfo, instance.groupId);
     this.swaggerInstance = instance;
     this.api = apiInfo;

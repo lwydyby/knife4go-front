@@ -527,6 +527,7 @@ export default {
           this.debugPathParams.push(ma[1]);
         }
       }
+      this.debugUrl=this.api.host+this.debugUrl
     },
     initLocalGlobalParameters() {
       const key = this.api.instanceId;
@@ -2038,6 +2039,7 @@ export default {
         //raw类型的请求需要判断是何种类型
         var headers = this.debugHeaders();
         var url = this.debugUrl;
+
         var methodType = this.api.methodType.toLowerCase();
         var formParams = this.debugUrlFormParams();
         //得到key-value的参数值,对请求类型进行判断，判断是否为path
@@ -2100,7 +2102,6 @@ export default {
           return config;
         });
         //console(headers);
-        //console(requestConfig);
         debugInstance
           .request(requestConfig)
           .then(res => {
@@ -2392,7 +2393,7 @@ export default {
       if (!url.startWith("/")) {
         fullurl += "/";
       }
-      fullurl += url;
+      fullurl = url;
       curlified.push("curl");
       curlified.push("-X", this.api.methodType.toUpperCase());
       //设置请求头

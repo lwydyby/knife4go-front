@@ -528,6 +528,7 @@ const utils = {
     return val;
   },
   getClassName: function (item) {
+    var regex = new RegExp("#/components/schemas/(.*)$", "ig");
     var regex = new RegExp("#/definitions/(.*)$", "ig");
     if (regex.test(item)) {
       var ptype = RegExp.$1;
@@ -633,3 +634,4 @@ const utils = {
 
 
 export default utils;
+

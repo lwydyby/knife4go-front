@@ -373,10 +373,10 @@ SwaggerBootstrapUi.prototype.configInit = function () {
         }
       }
     }).catch(function (err) {
-      //message.error('Knife4j文档请求异常')
-      //隐藏config的请求接口错误显示
-      that.error(err);
-    })
+    //message.error('Knife4j文档请求异常')
+    //隐藏config的请求接口错误显示
+    that.error(err);
+  })
 }
 
 /***
@@ -751,7 +751,8 @@ SwaggerBootstrapUi.prototype.setInstanceBasicPorperties = function (menu) {
     version = '',
     termsOfService = '';
   var servers = KUtils.getValue(menu, "servers", [], true);
-  var host = (servers.length ? servers[0].url : "");
+  var host = KUtils.getValue(menu, "host", "", true);
+  var basePath= KUtils.getValue(menu, "basePath", "", true);;
   if (menu != null && menu != undefined) {
     if (menu.hasOwnProperty("info")) {
       var info = menu.info;
@@ -771,7 +772,7 @@ SwaggerBootstrapUi.prototype.setInstanceBasicPorperties = function (menu) {
     that.currentInstance.contact = name;
     that.currentInstance.version = version;
     that.currentInstance.termsOfService = termsOfService;
-    that.currentInstance.basePath = "/";
+    that.currentInstance.basePath = basePath;
   } else {
     title = that.currentInstance.title;
   }
@@ -1611,14 +1612,14 @@ SwaggerBootstrapUi.prototype.createDetailMenu = function (addFlag) {
     icon: 'icon-zdlxb',
     path: 'documentManager',
     children: [{
-        groupName: groupName,
-        groupId: groupId,
-        key: 'globalParameters' + md5(groupName),
-        name: '全局参数设置',
-        tabName: '全局参数设置(' + groupName + ')',
-        component: 'GlobalParameters',
-        path: 'GlobalParameters-' + groupName
-      },
+      groupName: groupName,
+      groupId: groupId,
+      key: 'globalParameters' + md5(groupName),
+      name: '全局参数设置',
+      tabName: '全局参数设置(' + groupName + ')',
+      component: 'GlobalParameters',
+      path: 'GlobalParameters-' + groupName
+    },
       {
         groupName: groupName,
         groupId: groupId,
@@ -2649,6 +2650,7 @@ SwaggerBootstrapUi.prototype.assembleParameter=function(m,swpinfo){
     }
   }
 }
+
 /**
  * 过滤组件
  * @param json

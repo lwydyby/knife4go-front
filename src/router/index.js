@@ -43,8 +43,7 @@ const routes = [{
 }]
 
 const router = new VueRouter({
-  routes:routes,
-  mode:"hash"
+  routes
 })
 
 export default router
