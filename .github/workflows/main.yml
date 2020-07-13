@@ -1,0 +1,43 @@
+name: web-CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [8.x]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 8
+      uses: actions/setup-node@v1
+      with:
+        node-version: 8
+    - name: npm install, build, and test
+      run: |
+        npm install
+        npm run build:test --if-present
+    - name: Publish Docker
+      uses: elgohr/Publish-Docker-Github-Action@2.11
+      with:
+        # The name of the image you would like to push
+        name: ${{secrets.DOCKER_PROGRAM}}
+        # The login username for the registry
+        username: ${{secrets.DOCKER_USERNAME}}
+        # The login password for the registry
+        password: ${{secrets.DOCKER_PASSWORD}}
+          # Use registry for pushing to a custom registry
+        registry: ${{secrets.DOCKER_REGISTRY}}
+
+
+
+
+
+
